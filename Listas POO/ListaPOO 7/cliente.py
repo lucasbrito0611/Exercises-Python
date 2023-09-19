@@ -77,4 +77,4 @@ class NCliente:
   @classmethod
   def salvar(cls):
     with open("clientes.json", mode="w") as f:
-        json.dump(cls.__clientes, f, default=vars)
+        json.dump(cls.__clientes, f, default=vars, indent=1)

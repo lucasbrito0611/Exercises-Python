@@ -77,4 +77,4 @@ class NServico:
     @classmethod
     def salvar(cls):
         with open("servicos.json", mode="w") as f:
-            json.dump(cls.__servicos, f, default=vars)
+            json.dump(cls.__servicos, f, default=vars, indent=1)

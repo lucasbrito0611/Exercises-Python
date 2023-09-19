@@ -85,4 +85,4 @@ class NAgenda:
     @classmethod
     def salvar(cls):
         with open("agendas.json", mode="w") as f:
-            json.dump(cls.__agendas, f, default = Agenda.to_json)
+            json.dump(cls.__agendas, f, default = Agenda.to_json, indent=1)

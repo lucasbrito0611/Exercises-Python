@@ -1,1 +1,8 @@
-[{"_Cliente__id": 1, "_Cliente__nome": "lucas", "_Cliente__email": "lucas@gmail", "_Cliente__fone": "9999999"}]
+[
+ {
+  "_Cliente__id": 1,
+  "_Cliente__nome": "Lucas Brito",
+  "_Cliente__email": "lucasbrito2006@hotmail.com",
+  "_Cliente__fone": "(84)99857-4985"
+ }
+]
