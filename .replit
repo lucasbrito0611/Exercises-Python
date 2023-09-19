@@ -1,6 +1,5 @@
 # The command that runs the program. If the interpreter field is set, it will have priority and this run command will do nothing
-run = "python3 './Listas POO/ListaPOO Rev 6/Ex02/Ex02.py'"
-# run = "python3 './Listas POO/ListaPOO Rev 5/Ex03.py'"
+run = "python3 './Listas POO/ListaPOO 7/UI.py'"
 
 # The primary language of the repl. There can be others, though!
 language = "python3"
