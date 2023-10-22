@@ -6,7 +6,7 @@ class Servico:
         self.__descricao = descricao
         self.__valor = valor
         self.__duracao = duracao
-    
+
     def set_id(self, id): self.__id = id
     def set_descricao(self, descricao): self.__descricao = descricao
     def set_valor(self, valor): self.__valor = valor
@@ -29,7 +29,7 @@ class NServico:
         id = 0 
         for servico in cls.__servicos:
             if servico.get_id() > id: id = servico.get_id()
-    
+
         obj.set_id(id + 1)
         cls.__servicos.append(obj)  
         NServico.salvar()
