@@ -19,14 +19,32 @@ class AgendaUI:
 
     @classmethod
     def Listar(cls):
-        lista = []
+        tabela = []
 
         for agenda in Views.agenda_listar():
-            lista.append(agenda.to_json())
 
-        df = pd.DataFrame(lista)
+            id = agenda.get_id()
+            data = agenda.get_data()
+            conf = agenda.get_confirmado()
+            idCliente = int(agenda.get_idCliente())
+            idServico = int(agenda.get_idServico())
 
-        st.dataframe(df)
+            if idCliente != 0 and idServico != 0:
+                clientes = Views.cliente_listar()
+                for cliente in clientes:
+                    if idCliente == cliente.get_id():
+                        idCliente = cliente.get_nome()
+
+                servicos = Views.servico_listar()
+                for servico in servicos:
+                    if idServico == servico.get_id():
+                        idServico = servico.get_descricao()
+
+            tabela.append([id, data, conf, idCliente, idServico])
+
+        df = pd.DataFrame(tabela, columns=['Id', 'Data', 'Confirmado', 'idCliente', 'idServico'])
+
+        st.dataframe(df, use_container_width=True)
 
     @classmethod
     def Inserir(cls):
@@ -39,10 +57,14 @@ class AgendaUI:
             Views.agenda_inserir(data, confirmado, idCliente, idServico)
             st.success('Agenda inserida com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
 
     @classmethod
     def Atualizar(cls):
+        data = ''
+        idCliente = ''
+        idServico = ''
+
         opcao = st.selectbox(
             'Atualização de agendas',
             (Views.agenda_listar()),
@@ -51,17 +73,20 @@ class AgendaUI:
         )
         if opcao:
             id = opcao.get_id()
+            data = opcao.get_data()
+            idCliente = opcao.get_idCliente()
+            idServico = opcao.get_idServico()
 
-        data = st.text_input('Informe a nova data e horário:')
-        idCliente = st.text_input('Informe o novo id do Cliente:')
-        idServico = st.text_input('Informe o novo id do Serviço:')
+        data = st.text_input('Informe a nova data e horário:', data)
+        idCliente = st.text_input('Informe o novo id do Cliente:', idCliente)
+        idServico = st.text_input('Informe o novo id do Serviço:', idServico)
         confirmado = False
 
         if st.button('Atualizar'):
             Views.agenda_atualizar(id, data, confirmado, idCliente, idServico)
             st.success('Agenda atualizada com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
 
     @classmethod
     def Excluir(cls):
@@ -78,4 +103,4 @@ class AgendaUI:
             Views.agenda_excluir(id)
             st.success('Agenda excluída com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
