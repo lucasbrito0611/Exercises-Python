@@ -56,12 +56,13 @@ class NAgenda:
     @classmethod
     def atualizar(cls, obj):
         NAgenda.abrir()
-        cliente = cls.listar_id(obj.get_id())
-        cliente.set_data(obj.get_data())
-        cliente.set_confirmado(obj.get_confirmado())
-        cliente.set_idCliente(obj.get_idCliente())
-        cliente.set_idServico(obj.get_idServico())
-        NAgenda.salvar()
+        agenda = cls.listar_id(obj.get_id())
+        if agenda is not None:
+            agenda.set_data(obj.get_data())
+            agenda.set_confirmado(obj.get_confirmado())
+            agenda.set_idCliente(obj.get_idCliente())
+            agenda.set_idServico(obj.get_idServico())
+            NAgenda.salvar()
 
     @classmethod
     def excluir(cls, obj):

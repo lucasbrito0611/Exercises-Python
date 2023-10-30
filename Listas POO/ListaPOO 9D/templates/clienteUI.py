@@ -37,15 +37,26 @@ class ClienteUI:
     def Inserir(cls):
         nome = st.text_input('Informe o nome: ')
         email = st.text_input('Informe o e-mail: ')
+        senha = st.text_input('Informe a senha: ')
         fone = st.text_input('Informe o telefone: ')
+
         if st.button('Inserir'):
-            Views.cliente_inserir(nome, email, fone)
-            st.success('Cliente inserido com sucesso')
-            time.sleep(1)
-            st.experimental_rerun()
+            if Views.cliente_inserir(nome, email, senha, fone):
+                st.success('Cliente inserido com sucesso')
+                time.sleep(1)
+                st.rerun()
+            else:
+                st.error('Email já cadastrado')
+                time.sleep(2)
+                st.rerun()
 
     @classmethod
     def Atualizar(cls):
+        nome = ''
+        email = ''
+        senha = ''
+        fone = ''
+
         opcao = st.selectbox(
             'Atualização de clientes',
             (Views.cliente_listar()),
@@ -54,16 +65,21 @@ class ClienteUI:
         )
         if opcao:
             id = opcao.get_id()
+            nome = opcao.get_nome()
+            email = opcao.get_email()
+            senha = opcao.get_senha()
+            fone = opcao.get_fone()
 
-        nome = st.text_input('Nome novo: ')
-        email = st.text_input('E-mail novo: ')
-        fone = st.text_input('Telefone novo: ')
+        nome = st.text_input('Nome novo: ', nome)
+        email = st.text_input('E-mail novo: ', email)
+        senha = st.text_input('Senha nova: ', senha)
+        fone = st.text_input('Telefone novo: ', fone)
 
         if st.button('Atualizar'):
-            Views.cliente_atualizar(id, nome, email, fone)
+            Views.cliente_atualizar(id, nome, email, senha, fone)
             st.success('Cliente atualizado com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
 
     @classmethod
     def Excluir(cls):
@@ -80,4 +96,4 @@ class ClienteUI:
             Views.cliente_excluir(id)
             st.success('Cliente excluído com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()

@@ -5,15 +5,19 @@ from models.agenda import Agenda, NAgenda
 
 class Views:
     @classmethod
-    def cliente_inserir(cls, nome, email, fone):
-        cliente = Cliente(0, nome, email, fone)
-        NCliente.inserir(cliente)
+    def cliente_inserir(cls, nome, email, senha, fone):
+        cliente = Cliente(0, nome, email, senha, fone)
+        if NCliente.ver_email(email) == True:
+            NCliente.inserir(cliente)
+            return True
+        else: 
+            return False
     @classmethod
     def cliente_listar(cls):
         return NCliente.listar()
     @classmethod
-    def cliente_atualizar(cls, id, nome, email, fone):
-        cliente = Cliente(id, nome, email, fone)
+    def cliente_atualizar(cls, id, nome, email, senha, fone):
+        cliente = Cliente(id, nome, email, senha, fone)
         NCliente.atualizar(cliente)
     @classmethod
     def cliente_excluir(cls, id):

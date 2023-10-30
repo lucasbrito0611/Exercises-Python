@@ -5,7 +5,7 @@ from views import Views
 
 class ServicoUI:
     def Main():
-        st.title('Cadastro de Serviços')
+        st.title('Serviço')
 
         tab1, tab2, tab3, tab4 = st.tabs(['Listar', 'Inserir', 'Atualizar', 'Excluir'])
 
@@ -44,10 +44,14 @@ class ServicoUI:
             Views.servico_inserir(descricao, float(valor), duracao)
             st.success('Serviço inserido com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
 
     @classmethod
     def Atualizar(cls):
+        descricao = ''
+        valor = ''
+        duracao = ''
+
         opcao = st.selectbox(
             'Atualização de serviços',
             (Views.servico_listar()),
@@ -56,16 +60,19 @@ class ServicoUI:
         )
         if opcao:
             id = opcao.get_id()
+            descricao = opcao.get_descricao()
+            valor = opcao.get_valor()
+            duracao = opcao.get_duracao()
 
-        descricao = st.text_input('Descrição nova:')
-        valor = st.text_input('Valor novo:')
-        duracao = st.text_input('Duração nova (min):')
+        descricao = st.text_input('Descrição nova:', descricao)
+        valor = st.text_input('Valor novo:', valor)
+        duracao = st.text_input('Duração nova (min):', duracao)
 
         if st.button('Atualizar'):
             Views.servico_atualizar(id, descricao, float(valor), duracao)
             st.success('Serviço atualizado com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
 
     @classmethod
     def Excluir(cls):
@@ -83,4 +90,4 @@ class ServicoUI:
             Views.servico_excluir(id)
             st.success('Serviço excluído com sucesso')
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()

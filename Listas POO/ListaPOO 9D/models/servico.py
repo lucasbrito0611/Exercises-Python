@@ -50,10 +50,11 @@ class NServico:
     def atualizar(cls, obj):
         NServico.abrir()
         servico = cls.listar_id(obj.get_id())
-        servico.set_descricao(obj.get_descricao())
-        servico.set_valor(obj.get_valor())
-        servico.set_duracao(obj.get_duracao())
-        NServico.salvar()
+        if servico is not None:
+            servico.set_descricao(obj.get_descricao())
+            servico.set_valor(obj.get_valor())
+            servico.set_duracao(obj.get_duracao())
+            NServico.salvar()
 
     @classmethod
     def excluir(cls, obj):
