@@ -32,7 +32,7 @@ class ManterAgendaUI:
     if st.button("Inserir"):
       try:
         data = datetime.datetime.strptime(datastr, "%d/%m/%Y %H:%M")
-        View.agenda_inserir(data, True, cliente.get_id(), servico.get_id())
+        View.agenda_inserir(data, False, cliente.get_id(), servico.get_id())
         st.success("Horário inserido com sucesso")
         time.sleep(2)
         st.rerun()
@@ -79,5 +79,3 @@ class ManterAgendaUI:
         st.success("Horário excluído com sucesso")
         time.sleep(2)
         st.rerun()
-
-

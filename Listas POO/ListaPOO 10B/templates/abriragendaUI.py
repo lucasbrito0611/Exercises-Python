@@ -3,7 +3,6 @@ from views import View
 import time
 
 class AbrirAgendaUI:
-
   def main():
     st.header("Abrir Agenda do Dia")
     AbrirAgendaUI.abrir_agenda()
@@ -19,5 +18,7 @@ class AbrirAgendaUI:
         st.success("Horário(s) inserido(s) com sucesso")
         time.sleep(2)
         st.rerun()
-      except ValueError as erro:
+      except TypeError as erro:
         st.error(erro)
+      except ValueError:
+        st.error('Data inválida!')
